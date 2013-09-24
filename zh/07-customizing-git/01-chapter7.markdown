@@ -178,7 +178,7 @@ diff包装脚本首先确定传递过来7个参数，随后把其中2个传递�
 	[merge]
 	  tool = extMerge
 	[mergetool "extMerge"]
-	  cmd = extMerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+	  cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
 	  trustExitCode = false
 	[diff]
 	  external = extDiff
@@ -518,7 +518,7 @@ Git属性在导出项目归档时也能发挥作用。
 
 #### 其他客户端挂钩 ####
 
-`pre- rebase`挂钩在衍合前运行，脚本以非零退出可以中止衍合的过程。你可以使用这个挂钩来禁止衍合已经推送的提交对象，Git `pre- rebase`挂钩样本就是这么做的。该样本假定next是你定义的分支名，因此，你可能要修改样本，把next改成你定义过且稳定的分支名。
+`pre-rebase`挂钩在衍合前运行，脚本以非零退出可以中止衍合的过程。你可以使用这个挂钩来禁止衍合已经推送的提交对象，Git `pre-rebase`挂钩样本就是这么做的。该样本假定next是你定义的分支名，因此，你可能要修改样本，把next改成你定义过且稳定的分支名。
 
 在`git checkout`成功运行后，`post-checkout`挂钩会被调用。他可以用来为你的项目环境设置合适的工作目录。例如：放入大的二进制文件、自动产生的文档或其他一切你不想纳入版本控制的文件。
 
@@ -672,8 +672,8 @@ update 脚本和 `pre-receive` 脚本十分类似。不同之处在于它会为�
 	      next if path.size == 0
 	      has_file_access = false
 	      access[$user].each do |access_path|
-	        if !access_path  # 用户拥有完全访问权限
-	          || (path.index(access_path) == 0) # 或者对此位置有访问权限
+	        if !access_path || # 用户拥有完全访问权限
+	          (path.index(access_path) == 0) # 或者对此位置有访问权限
 	          has_file_access = true 
 	        end
 	      end
@@ -687,7 +687,7 @@ update 脚本和 `pre-receive` 脚本十分类似。不同之处在于它会为�
 
 	check_directory_perms
 
-以上的大部分内容应该都比较容易理解。通过 `git rev-list` 获取推送到服务器内容的提交列表。然后，针对其中每一项，找出它试图修改的文件然后确保执行推送的用户对这些文件具有权限。一个不太容易理解的 Ruby 技巧石 `path.index(access_path) ==0` 这句，它的返回真值如果路径以 `access_path` 开头——这是为了确保 `access_path  ` 并不是只在允许的路径之一，而是所有准许全选的目录都在该目录之下。
+以上的大部分内容应该都比较容易理解。通过 `git rev-list` 获取推送到服务器内容的提交列表。然后，针对其中每一项，找出它试图修改的文件然后确保执行推送的用户对这些文件具有权限。一个不太容易理解的 Ruby 技巧是 `path.index(access_path) ==0` 这句，它的返回真值如果路径以 `access_path` 开头——这是为了确保 `access_path  ` 并不是只在允许的路径之一，而是所有准许全选的目录都在该目录之下。
 
 现在你的用户没法推送带有不正确的提交信息的内容，也不能在准许他们访问范围之外的位置做出修改。
 

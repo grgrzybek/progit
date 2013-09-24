@@ -52,7 +52,7 @@ Git 使用的传输协议中最常见的可能就是 SSH 了。这是因为大�
 
 通过 SSH 克隆一个 Git 仓库，你可以像下面这样给出 ssh:// 的 URL：
 
-	$ git clone ssh://user@server:project.git
+	$ git clone ssh://user@server/project.git
 
 或者不指明某个协议 — 这时 Git 会默认使用 SSH ：
 	
@@ -504,7 +504,7 @@ Gitosis 也具有简单的访问控制功能。如果想让 John 只有读权限
 
 Note: the latest copy of this section of the ProGit book is always available within the [gitolite documentation][gldpg].  The author would also like to humbly state that, while this section is accurate, and *can* (and often *has*) been used to install gitolite without reading any other documentation, it is of necessity not complete, and cannot completely replace the enormous amount of documentation that gitolite comes with.
 
-[gldpg]: http://github.com/sitaramc/gitolite/blob/pu/doc/progit-article.mkd
+[gldpg]: http://sitaramc.github.com/gitolite/progit.html
 
 Git has started to become very popular in corporate environments, which tend to have some additional requirements in terms of access control.  Gitolite was originally created to help with those requirements, but it turns out that it's equally useful in the open source world: the Fedora Project controls access to their package management repositories (over 10,000 of them!) using gitolite, and this is probably the largest gitolite installation anywhere too.
 
@@ -750,7 +750,7 @@ Gitosis 还能设定哪些项目允许放在 GitWeb 上显示。先打开 GitWeb
 
 目前，可供选择的托管服务数量繁多，各有利弊。在 Git 官方 wiki 上的 Githosting 页面有一个最新的托管服务列表：
 
-	http://git.or.cz/gitwiki/GitHosting
+	https://git.wiki.kernel.org/index.php/GitHosting
 
 由于本书无法全部一一介绍，而本人（译注：指本书作者 Scott Chacon。）刚好在其中一家公司工作，所以接下来我们将会介绍如何在 GitHub 上建立新账户并启动项目。至于其他托管服务大体也是这么一个过程，基本的想法都是差不多的。
 
